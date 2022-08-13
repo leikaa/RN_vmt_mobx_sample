@@ -1,3 +1,6 @@
-export const Screens = {
-  HOME_MAIN: 'HOME_MAIN',
-};
+export enum screens {
+  AUTH_MAIN = 'AUTH_MAIN',
+  AUTH_REGISTRATION = 'AUTH_REGISTRATION',
+
+  HOME_MAIN = 'HOME_MAIN',
+}

@@ -2,34 +2,39 @@ import { NavigationContainerRef } from '@react-navigation/core';
 import { StackActions } from '@react-navigation/native';
 import * as React from 'react';
 
-import { Stacks } from '../navigation/consts/stacks';
+import { stacks } from '../navigation/consts/stacks';
 
 export interface NavigationParams {
   [key: string]: any;
 }
 
-class NavigationC {
-  navigationRef = React.createRef<NavigationContainerRef<any>>();
+export default class Navigation {
+  static navigationRef = React.createRef<NavigationContainerRef<any>>();
 
-  initialRoute: string = Stacks.HOME_STACK;
+  static initialRoute: string = stacks.AUTH_STACK;
 
-  setInitialRoute = (route: string) => {
+  static setInitialRoute = (route: string) => {
     this.initialRoute = route;
   };
 
-  getCurrentRouteName = () => {
+  static getCurrentRouteName = () => {
     return this.navigationRef.current?.getCurrentRoute()?.name;
   };
 
-  push = (routeName: string, params?: NavigationParams) => {
+  static push = (routeName: string, params?: NavigationParams) => {
     setTimeout(() => this.navigationRef.current?.dispatch(StackActions.push(routeName, params)), 0);
   };
 
-  navigate = (routeName: string, params?: NavigationParams) => {
+  static navigate = <ParamList extends {}>(
+    routeName: string | keyof ParamList,
+    params?: ParamList[keyof ParamList] | { screen: keyof ParamList; params?: ParamList[keyof ParamList] },
+  ) => {
+    // https://github.com/react-navigation/react-navigation/issues/6879
     setTimeout(() => this.navigationRef.current?.navigate(routeName, params), 0);
   };
 
-  replace = (routeName: string, params?: NavigationParams) => {
+  static replace = (routeName: string, params?: NavigationParams) => {
+    // https://github.com/react-navigation/react-navigation/issues/6879
     setTimeout(
       () =>
         this.navigationRef.current?.reset({
@@ -40,15 +45,12 @@ class NavigationC {
     );
   };
 
-  pop = () => {
+  static pop = () => {
     this.navigationRef.current?.goBack();
   };
 
-  pop2 = () => {
+  static pop2 = () => {
     this.pop();
     this.pop();
   };
 }
-
-const Navigation = new NavigationC();
-export default Navigation;

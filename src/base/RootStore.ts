@@ -1,7 +1,13 @@
 import React from 'react';
 
+import { AuthStore } from '../modules/auth/AuthStore';
+
 class RootStore {
-  constructor() {}
+  authStore: AuthStore;
+
+  constructor() {
+    this.authStore = new AuthStore();
+  }
 
   sync = async () => {
     await Promise.all(
