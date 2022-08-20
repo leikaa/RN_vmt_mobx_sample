@@ -13,10 +13,6 @@ export default class Navigation {
 
   static initialRoute: string = stacks.AUTH_STACK;
 
-  static setInitialRoute = (route: string) => {
-    this.initialRoute = route;
-  };
-
   static getCurrentRouteName = () => {
     return this.navigationRef.current?.getCurrentRoute()?.name;
   };
@@ -47,10 +43,5 @@ export default class Navigation {
 
   static pop = () => {
     this.navigationRef.current?.goBack();
-  };
-
-  static pop2 = () => {
-    this.pop();
-    this.pop();
   };
 }

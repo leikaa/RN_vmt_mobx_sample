@@ -1,5 +1,15 @@
-import React, { forwardRef, Ref, useEffect, useRef, useState } from 'react';
-import { ColorValue, StyleProp, StyleSheet, TextInput, TextInputProps, View, ViewStyle } from 'react-native';
+import React, { forwardRef, Ref, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  ColorValue,
+  NativeSyntheticEvent,
+  StyleProp,
+  StyleSheet,
+  TextInput,
+  TextInputFocusEventData,
+  TextInputProps,
+  View,
+  ViewStyle,
+} from 'react-native';
 import Animated, { EasingNode, interpolateNode, timing } from 'react-native-reanimated';
 
 import { Colors } from '../../styles/Colors';
@@ -13,52 +23,78 @@ export enum InputSize {
 }
 
 export interface IInputProps extends TextInputProps {
-  label?: string;
-  isValid?: boolean;
+  onChangeText?: (value: string) => void;
   isRequired?: boolean;
+  isValid?: boolean;
+  label?: string;
   errorMessage?: string;
   size?: InputSize;
   containerStyle?: StyleProp<ViewStyle>;
+  backgroundColor?: ColorValue;
   leftComponent?: React.ReactNode;
   rightComponent?: React.ReactNode;
-  backgroundColor?: ColorValue;
-  onChangeText?: (value: string) => void;
 }
 
 export const Input = forwardRef((props: IInputProps, inputRef: Ref<TextInput>) => {
   const { size = InputSize.Large } = props;
-  const hasValue = props.value?.length;
-  const isError = props.isValid === false && props.errorMessage?.trim().length;
+  const hasValue = Boolean(props.value?.length);
 
-  const [isFocused, setIsFocused] = useState<boolean>(Boolean(props.autoFocus || hasValue));
-  const [isValueDefined, setIsValueDefined] = useState<boolean>(false);
+  const [isFocused, setIsFocused] = useState<boolean>(Boolean(props.autoFocus));
+  const [isCaretHidden, setIsCaretHidden] = useState<boolean>(true);
+  const [shouldValidate, setShouldValidate] = useState<boolean>(false);
 
+  const animationDuration = 120;
+  const shouldAnimate = isFocused || hasValue;
   const labelAnimation = useRef(new Animated.Value(props.autoFocus || hasValue ? 1 : 0)).current;
+
+  const isError = props.isValid === false && Boolean(props.errorMessage?.trim().length) && hasValue && shouldValidate;
+
+  const placeholder = useMemo(() => {
+    if (props.placeholder) {
+      if (props.isRequired) {
+        return `${props.placeholder}*`;
+      }
+
+      return props.placeholder;
+    }
+
+    return undefined;
+  }, [props.isRequired, props.placeholder]);
 
   useEffect(() => {
     setTimeout(() => {
       timing(labelAnimation, {
-        toValue: isFocused || hasValue ? 1 : 0,
-        duration: 50,
+        toValue: shouldAnimate ? 1 : 0,
+        duration: animationDuration,
         easing: EasingNode.sin,
       }).start();
+
+      setTimeout(() => {
+        setIsCaretHidden(!shouldAnimate);
+      }, Math.floor(animationDuration / 2));
     }, 0);
   }, [isFocused, hasValue]);
 
   const handleOnChangeText = (value: string) => {
     if (props.onChangeText) {
+      setShouldValidate(false);
+
       props.onChangeText(value);
     }
-
-    setIsValueDefined(true);
   };
 
   const handleOnFocus = () => {
     setIsFocused(true);
   };
 
-  const handleOnBlur = () => {
+  const handleOnBlur = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+    props.onBlur && props.onBlur(e);
+
     setIsFocused(false);
+
+    if (hasValue && !shouldValidate) {
+      setShouldValidate(true);
+    }
   };
 
   const renderError = (title: string) => {
@@ -75,10 +111,6 @@ export const Input = forwardRef((props: IInputProps, inputRef: Ref<TextInput>) =
   };
 
   const renderErrorMessage = () => {
-    if (props.isRequired && props.value?.length && isValueDefined) {
-      return renderError('This field is required');
-    }
-
     if (isError && props.errorMessage) {
       return renderError(props.errorMessage);
     }
@@ -141,7 +173,7 @@ export const Input = forwardRef((props: IInputProps, inputRef: Ref<TextInput>) =
                   ...styles.labelText,
                 }}
               >
-                {props.placeholder}
+                {placeholder}
               </Animated.Text>
             </Animated.View>
           </View>
@@ -156,13 +188,14 @@ export const Input = forwardRef((props: IInputProps, inputRef: Ref<TextInput>) =
             onChangeText={handleOnChangeText}
             style={[
               styles.input,
+              props.multiline && styles.multilineInput,
               props.leftComponent ? styles.leftComponentText : {},
-              props.multiline ? styles.multilineInput : {},
             ]}
+            caretHidden={isCaretHidden}
             onFocus={handleOnFocus}
             onBlur={handleOnBlur}
-            placeholder={props.leftComponent ? props.placeholder : ''}
-            selectionColor={Colors.surface.primary}
+            placeholder={props.leftComponent ? placeholder : ''}
+            selectionColor={isCaretHidden ? Colors.transparent : Colors.surface.primary}
           />
 
           {props.rightComponent && <View style={styles.rightComponentWrap}>{props.rightComponent}</View>}
@@ -179,7 +212,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: Colors.surface.grey2,
+    borderColor: Colors.surface.disabled,
     height: 48,
     position: 'relative',
     backgroundColor: Colors.surface.white,
@@ -188,7 +221,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.surface.red,
   },
   focused: {
-    borderColor: Colors.surface.grey2,
+    borderColor: Colors.surface.primary,
   },
   multiline: {
     height: 180,
@@ -238,7 +271,7 @@ const styles = StyleSheet.create({
   },
   errorWrap: {
     marginTop: 4,
-    flex: 1,
+    width: '100%',
     flexDirection: 'row',
     alignItems: 'flex-start',
   },

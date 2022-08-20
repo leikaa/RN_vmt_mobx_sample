@@ -2,10 +2,11 @@ import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } f
 import { Platform } from 'react-native';
 
 import { appConfig } from '../../../appConfig';
-import { Screens } from '../../../navigation/consts/screens';
-import { Stacks } from '../../../navigation/consts/stacks';
+import { screens } from '../../../navigation/consts/screens';
+import { stacks } from '../../../navigation/consts/stacks';
 import Navigation from '../../Navigation';
 import Notification from '../../ui/Notification';
+import Log from '../../utils/Log';
 import { IApiClient } from '../IApiClient';
 import { IAxiosConfig, IAxiosResponse } from './IAxiosInterfaces';
 
@@ -18,14 +19,11 @@ export default class AxiosClient implements IApiClient {
 
   constructor(config?: AxiosRequestConfig) {
     this.api = axios.create(config);
+    this.api.defaults.baseURL = appConfig.defaultApiUrl;
 
     this.setInterceptorRequest();
     this.setInterceptorResponse();
   }
-
-  setBaseUrl = (value: string) => {
-    this.api.defaults.baseURL = value;
-  };
 
   setAccessToken = (token: string, tokenType: string = 'Bearer') => {
     this.api.defaults.headers.Authorization = `${tokenType} ${token}`;
@@ -52,14 +50,14 @@ export default class AxiosClient implements IApiClient {
   };
 
   protected getApiErrors = (error: any) => {
-    if (error?.message) {
-      if (!Array.isArray(error?.errors) && error?.errors) {
-        const errorsArray = Object.values(error?.errors);
+    if (error) {
+      if (Array.isArray(error)) {
+        const errorsArray = Object.values(error);
         const errors = Array.prototype.concat.apply([], errorsArray);
 
         Notification.showError(errors.join('\n') || 'Unknown error');
       } else {
-        Notification.showError(error?.message || 'Unknown error');
+        Notification.showError(error || 'Unknown error');
       }
     }
   };
@@ -88,9 +86,10 @@ export default class AxiosClient implements IApiClient {
   private setInterceptorResponse = () => {
     this.api.interceptors.response.use(
       (response: AxiosResponse) => {
+        Log.res(response);
+
         if (!this.SUCCESS_STATUSES.includes(response.status)) {
           Notification.showError(response.data?.message || 'Unknown error');
-
           return Promise.reject(response);
         }
 
@@ -101,12 +100,17 @@ export default class AxiosClient implements IApiClient {
         return response;
       },
       async error => {
+        Log.e(error);
+
         this.getApiErrors(error?.response?.data);
 
         if (error.response?.status) {
           switch (error.response?.status) {
             case this.UNAUTHORIZED_ERROR:
-              Navigation.replace(Stacks.AUTH_STACK, { screen: Screens.AUTH_MAIN });
+              if (Navigation.getCurrentRouteName() !== screens.AUTH_MAIN) {
+                Navigation.replace(stacks.AUTH_STACK, { screen: screens.AUTH_MAIN });
+              }
+
               break;
 
             case this.SERVER_ERROR:

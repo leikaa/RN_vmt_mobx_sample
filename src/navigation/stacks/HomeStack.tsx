@@ -3,8 +3,9 @@ import React from 'react';
 
 import { HomeMainScreen } from '../../screens/HomeMainScreen';
 import { screens } from '../consts/screens';
+import { HomeStackParamList } from '../types/HomeStackTypes';
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<HomeStackParamList>();
 
 export default () => {
   return (

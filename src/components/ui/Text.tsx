@@ -33,7 +33,7 @@ export const Text = (props: IText) => {
       {...props}
       style={[
         {
-          fontFamily: props.fontFamily || 'Inter-Regular',
+          fontFamily: props.fontFamily,
         },
         styles[props.ag],
         {

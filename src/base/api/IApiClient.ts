@@ -1,6 +1,5 @@
 export interface IApiClient {
-  setBaseUrl: (value: string) => void;
-  setAccessToken: (token: string, tokenType: string) => void;
+  setAccessToken: (token: string) => void;
   clearAccessToken: () => void;
 
   get: <T extends {}>(config: any) => any;
