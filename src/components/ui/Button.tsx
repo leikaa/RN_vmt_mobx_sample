@@ -86,6 +86,7 @@ export const Button = ({ size = ButtonSize.Medium, type = ButtonType.Primary, ..
       onPress={props.loading || props.disabled ? undefined : props.onPress}
       activeOpacity={props.disabled ? 1 : props.activeOpacity}
       style={props.wrapperStyle}
+      testID={props.testID}
     >
       <View style={[buttonStyles, styles.buttonOpacity, props.disabled && styles.buttonDisabledOpacity]}>
         {!props.loading && props.startIcon}

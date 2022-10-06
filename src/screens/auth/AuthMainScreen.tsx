@@ -72,6 +72,7 @@ export const AuthMainScreen = observer(() => {
           onPress={handleNavigateToRegistration}
           type={ButtonType.Flat}
           containerStyle={styles.registerButton}
+          testID={'submitButton'}
         />
       </View>
 
