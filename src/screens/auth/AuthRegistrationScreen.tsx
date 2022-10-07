@@ -53,6 +53,7 @@ export const AuthRegistrationScreen = observer(() => {
         value={authStore.registrationForm.username}
         onChangeText={value => handleChangeForm(RegistrationFormFields.username, value)}
         placeholder={'Name'}
+        testID={'inputName'}
       />
 
       <Input
@@ -65,6 +66,7 @@ export const AuthRegistrationScreen = observer(() => {
         isValid={FormValidationHelper.isEmailValid(authStore.registrationForm.email)}
         errorMessage={'Invalid email'}
         containerStyle={DefaultStyles.mt24}
+        testID={'inputEmail'}
       />
 
       <Input
@@ -75,7 +77,14 @@ export const AuthRegistrationScreen = observer(() => {
         autoCapitalize={'none'}
         secureTextEntry={!isPasswordVisible}
         containerStyle={DefaultStyles.mt24}
-        rightComponent={<PasswordVisibilityButton isVisible={isPasswordVisible} onPress={handlePasswordVisibility} />}
+        rightComponent={
+          <PasswordVisibilityButton
+            isVisible={isPasswordVisible}
+            onPress={handlePasswordVisibility}
+            testID={'buttonShowPassword'}
+          />
+        }
+        testID={'inputPassword'}
       />
 
       <Input
@@ -91,6 +100,7 @@ export const AuthRegistrationScreen = observer(() => {
         errorMessage={'Password must be repeated exactly'}
         secureTextEntry={!isPasswordVisible}
         containerStyle={DefaultStyles.mt24}
+        testID={'inputRepeatedPassword'}
       />
 
       <Button
@@ -99,6 +109,7 @@ export const AuthRegistrationScreen = observer(() => {
         disabled={!authStore.registrationForm.isFormValid(authStore.registrationForm)}
         loading={authStore.registrationLoading}
         wrapperStyle={[styles.submitButtonContainer, DefaultStyles.mt24]}
+        testID={'buttonSubmit'}
       />
     </ScrollView>
   );

@@ -1,7 +1,13 @@
 const config = {
   preset: 'react-native',
-  transformIgnorePatterns: ['node_modules/(?!@react-native|react-native)'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  transformIgnorePatterns: ['node_modules/(?!(jest-)?@react-native|react-native|react-native-flash-message/*)'],
+  transform: {
+    '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
+  },
+  moduleNameMapper: {
+    '^.+.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
+  },
   setupFiles: ['<rootDir>jest.setup.js'],
 };
 

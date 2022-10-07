@@ -4,10 +4,10 @@ import React from 'react';
 import Navigation from '../../../src/base/Navigation';
 import { screens } from '../../../src/navigation/consts/screens';
 import { stacks } from '../../../src/navigation/consts/stacks';
-import { AuthMainScreen } from '../../../src/screens/auth/AuthMainScreen';
+import { AuthRegistrationScreen } from '../../../src/screens/auth/AuthRegistrationScreen';
 
-describe('Auth main screen', () => {
-  const renderScreen = () => render(<AuthMainScreen />);
+describe('Auth registration screen', () => {
+  const renderScreen = () => render(<AuthRegistrationScreen />);
 
   it('should validate email', () => {
     const screen = renderScreen();
@@ -19,39 +19,46 @@ describe('Auth main screen', () => {
     expect(screen.queryAllByText('Invalid email').length).toEqual(0);
   });
 
-  it('should display password on show press', () => {
+  it('should display password and repeated password on show press', () => {
     const screen = renderScreen();
     const inputPassword = screen.getByTestId('inputPassword');
+    const inputRepeatedPassword = screen.getByTestId('inputRepeatedPassword');
     const buttonShowPassword = screen.getByTestId('buttonShowPassword');
 
     fireEvent.press(buttonShowPassword);
 
     expect(inputPassword.props.secureTextEntry).toBeFalsy();
+    expect(inputRepeatedPassword.props.secureTextEntry).toBeFalsy();
   });
 
-  it('should navigate to main screen on sign in press with correct credentials', async () => {
+  it('should give an error if passwords are different', () => {
     const screen = renderScreen();
+    const inputPassword = screen.getByTestId('inputPassword');
+    const inputRepeatedPassword = screen.getByTestId('inputRepeatedPassword');
+
+    fireEvent.changeText(inputPassword, '123456');
+    fireEvent.changeText(inputRepeatedPassword, '654321');
+    fireEvent(inputRepeatedPassword, 'blur');
+
+    expect(screen.queryAllByText('Password must be repeated exactly').length).toEqual(1);
+  });
+
+  it('should navigate to main screen on submit press with correct credentials', async () => {
+    const screen = renderScreen();
+    const timestamp = Date.now();
+    const inputName = screen.getByTestId('inputName');
     const inputEmail = screen.getByTestId('inputEmail');
     const inputPassword = screen.getByTestId('inputPassword');
     const buttonSubmit = screen.getByTestId('buttonSubmit');
 
     spyOn(Navigation, 'replace');
-    fireEvent.changeText(inputEmail, 'test@test.ru');
-    fireEvent.changeText(inputPassword, '123456');
+    fireEvent.changeText(inputName, `test_vmt${timestamp}`);
+    fireEvent.changeText(inputEmail, `test@testvmt${timestamp}.com`);
+    fireEvent.changeText(inputPassword, `123456`);
     fireEvent.press(buttonSubmit);
 
     await waitFor(() => {
       expect(Navigation.replace).toHaveBeenCalledWith(stacks.HOME_STACK, { screen: screens.HOME_MAIN });
     });
-  });
-
-  it('should navigate to registration on sign up press', () => {
-    const screen = renderScreen();
-    const registrationButton = screen.getByTestId('buttonRegistration');
-
-    spyOn(Navigation, 'navigate');
-    fireEvent.press(registrationButton);
-
-    expect(Navigation.navigate).toHaveBeenCalledWith(stacks.AUTH_STACK, { screen: screens.AUTH_REGISTRATION });
   });
 });

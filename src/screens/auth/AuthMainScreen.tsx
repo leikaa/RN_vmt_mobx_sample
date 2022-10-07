@@ -54,6 +54,7 @@ export const AuthMainScreen = observer(() => {
         autoCapitalize={'none'}
         isValid={FormValidationHelper.isEmailValid(authStore.loginForm.email)}
         errorMessage={'Invalid email'}
+        testID={'inputEmail'}
       />
 
       <Input
@@ -63,7 +64,14 @@ export const AuthMainScreen = observer(() => {
         autoCapitalize={'none'}
         secureTextEntry={!isPasswordVisible}
         containerStyle={DefaultStyles.mt24}
-        rightComponent={<PasswordVisibilityButton isVisible={isPasswordVisible} onPress={handlePasswordVisibility} />}
+        rightComponent={
+          <PasswordVisibilityButton
+            isVisible={isPasswordVisible}
+            onPress={handlePasswordVisibility}
+            testID={'buttonShowPassword'}
+          />
+        }
+        testID={'inputPassword'}
       />
 
       <View style={[styles.registerContainer, DefaultStyles.mt8]}>
@@ -72,7 +80,7 @@ export const AuthMainScreen = observer(() => {
           onPress={handleNavigateToRegistration}
           type={ButtonType.Flat}
           containerStyle={styles.registerButton}
-          testID={'submitButton'}
+          testID={'buttonRegistration'}
         />
       </View>
 
@@ -82,6 +90,7 @@ export const AuthMainScreen = observer(() => {
         disabled={!authStore.loginForm.isFormValid(authStore.loginForm)}
         loading={authStore.loginLoading}
         wrapperStyle={[styles.loginButtonContainer, DefaultStyles.mt24]}
+        testID={'buttonSubmit'}
       />
     </ScrollView>
   );

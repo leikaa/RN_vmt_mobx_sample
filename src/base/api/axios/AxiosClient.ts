@@ -6,7 +6,6 @@ import { screens } from '../../../navigation/consts/screens';
 import { stacks } from '../../../navigation/consts/stacks';
 import Navigation from '../../Navigation';
 import Notification from '../../ui/Notification';
-import Log from '../../utils/Log';
 import { IApiClient } from '../IApiClient';
 import { IAxiosConfig, IAxiosResponse } from './IAxiosInterfaces';
 
@@ -86,8 +85,6 @@ export default class AxiosClient implements IApiClient {
   private setInterceptorResponse = () => {
     this.api.interceptors.response.use(
       (response: AxiosResponse) => {
-        Log.res(response);
-
         if (!this.SUCCESS_STATUSES.includes(response.status)) {
           Notification.showError(response.data?.message || 'Unknown error');
           return Promise.reject(response);
@@ -100,8 +97,6 @@ export default class AxiosClient implements IApiClient {
         return response;
       },
       async error => {
-        Log.e(error);
-
         this.getApiErrors(error?.response?.data);
 
         if (error.response?.status) {
