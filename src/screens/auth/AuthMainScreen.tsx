@@ -1,3 +1,4 @@
+import { useBackHandler } from '@react-native-community/hooks';
 import { observer } from 'mobx-react';
 import React, { useEffect, useState } from 'react';
 import { Keyboard, ScrollView, StyleSheet, View } from 'react-native';
@@ -22,6 +23,10 @@ export const AuthMainScreen = observer(() => {
   useEffect(() => {
     return () => authStore.resetLoginForm();
   }, []);
+
+  useBackHandler(() => {
+    return Navigation.navigationRef.current?.getCurrentRoute()?.name === screens.AUTH_MAIN;
+  });
 
   const handleChangeForm = (key: LoginFormFields, value: string) => {
     authStore.changeLoginForm(key, value);

@@ -7,6 +7,7 @@ import { Colors } from '../styles/Colors';
 import { stacks } from './consts/stacks';
 import AuthStack from './stacks/AuthStack';
 import HomeStack from './stacks/HomeStack';
+import InitStack from './stacks/InitStack';
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,7 @@ const Navigator = () => {
   return (
     <NavigationContainer ref={Navigation.navigationRef} theme={navTheme}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name={stacks.INIT_STACK} component={InitStack} />
         <Stack.Screen name={stacks.AUTH_STACK} component={AuthStack} />
         <Stack.Screen name={stacks.HOME_STACK} component={HomeStack} />
       </Stack.Navigator>

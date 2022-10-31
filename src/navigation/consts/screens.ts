@@ -1,4 +1,6 @@
 export enum screens {
+  INIT_MAIN = 'INIT_MAIN',
+
   AUTH_MAIN = 'AUTH_MAIN',
   AUTH_REGISTRATION = 'AUTH_REGISTRATION',
 

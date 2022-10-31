@@ -12,7 +12,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		3EF6DCD5C4D6FC8A71A36842 /* libPods-vmt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29F36CD09B802F83B84E20DB /* libPods-vmt.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		AE6D225B290FE2B900C2CF0F /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE6D225A290FE2B900C2CF0F /* BootSplash.storyboard */; };
 		D4EF0F3BCE8AFFF741A9F0C4 /* libPods-vmt-vmtTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A03891BDF2CD2551068397FF /* libPods-vmt-vmtTests.a */; };
 /* End PBXBuildFile section */
 
@@ -38,9 +38,9 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = vmt/main.m; sourceTree = "<group>"; };
 		29F36CD09B802F83B84E20DB /* libPods-vmt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-vmt.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		470E92AE3086A057DFE4AE8B /* Pods-vmt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vmt.debug.xcconfig"; path = "Target Support Files/Pods-vmt/Pods-vmt.debug.xcconfig"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = vmt/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A03891BDF2CD2551068397FF /* libPods-vmt-vmtTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-vmt-vmtTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD9F4CCDD9D5F97A274AD3E3 /* Pods-vmt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vmt.release.xcconfig"; path = "Target Support Files/Pods-vmt/Pods-vmt.release.xcconfig"; sourceTree = "<group>"; };
+		AE6D225A290FE2B900C2CF0F /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = vmt/BootSplash.storyboard; sourceTree = "<group>"; };
 		C90B81C2003DA62C3134BA34 /* Pods-vmt-vmtTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vmt-vmtTests.debug.xcconfig"; path = "Target Support Files/Pods-vmt-vmtTests/Pods-vmt-vmtTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		EDF8939AC67330C61649233D /* Pods-vmt-vmtTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vmt-vmtTests.release.xcconfig"; path = "Target Support Files/Pods-vmt-vmtTests/Pods-vmt-vmtTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -86,11 +86,11 @@
 		13B07FAE1A68108700A75B9A /* vmt */ = {
 			isa = PBXGroup;
 			children = (
+				AE6D225A290FE2B900C2CF0F /* BootSplash.storyboard */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = vmt;
@@ -242,7 +242,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				AE6D225B290FE2B900C2CF0F /* BootSplash.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

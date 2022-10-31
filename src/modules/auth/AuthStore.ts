@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 
+import { Nullable } from '../../base/types/BaseTypes';
 import { isTrue } from '../../base/utils/baseUtil';
 import FormHelper from '../../helpers/FormHelper';
 import AuthService from './AuthService';
@@ -12,6 +13,8 @@ import TokenService from './modules/token/TokenService';
 export class AuthStore {
   loginLoading: boolean = false;
   registrationLoading: boolean = false;
+
+  accessToken: Nullable<string> = null;
 
   private authService: AuthService;
   private tokenService: TokenService;
@@ -50,6 +53,7 @@ export class AuthStore {
       .register(dto)
       .then(async response => {
         if (response.id_token) {
+          this.setAccessToken(response.id_token);
           await this.tokenService.saveToken(response.id_token);
         }
 
@@ -81,6 +85,16 @@ export class AuthStore {
       .finally(() => this.setLoginLoading(false));
   };
 
+  // OTHERS
+
+  checkAuth = async () => {
+    const token = await this.tokenService.getToken();
+
+    if (token) {
+      this.setAccessToken(token);
+    }
+  };
+
   // RESET
 
   resetLoginForm = () => {
@@ -92,6 +106,10 @@ export class AuthStore {
   };
 
   // SETTERS
+
+  private setAccessToken = (value: string) => {
+    this.accessToken = value;
+  };
 
   private setLoginLoading = (value: boolean) => {
     this.loginLoading = value;
