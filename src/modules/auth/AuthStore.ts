@@ -12,6 +12,7 @@ import TokenService from './modules/token/TokenService';
 
 export class AuthStore {
   loginLoading: boolean = false;
+  logoutLoading: boolean = false;
   registrationLoading: boolean = false;
 
   accessToken: Nullable<string> = null;
@@ -85,6 +86,15 @@ export class AuthStore {
       .finally(() => this.setLoginLoading(false));
   };
 
+  logout = async () => {
+    this.setLogoutLoading(true);
+
+    await this.tokenService.deleteToken();
+    this.setAccessToken(null);
+
+    this.setLogoutLoading(false);
+  };
+
   // OTHERS
 
   checkAuth = async () => {
@@ -107,12 +117,16 @@ export class AuthStore {
 
   // SETTERS
 
-  private setAccessToken = (value: string) => {
+  private setAccessToken = (value: Nullable<string>) => {
     this.accessToken = value;
   };
 
   private setLoginLoading = (value: boolean) => {
     this.loginLoading = value;
+  };
+
+  private setLogoutLoading = (value: boolean) => {
+    this.logoutLoading = value;
   };
 
   private setRegistrationLoading = (value: boolean) => {

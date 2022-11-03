@@ -9,4 +9,6 @@ export enum Screens {
   HOME_MAIN = 'HOME_MAIN',
 
   HISTORY_MAIN = 'HISTORY_MAIN',
+
+  PROFILE_MAIN = 'PROFILE_MAIN',
 }

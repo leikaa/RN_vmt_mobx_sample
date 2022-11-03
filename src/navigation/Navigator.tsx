@@ -7,6 +7,7 @@ import { Colors } from '../styles/Colors';
 import { Stacks } from './consts/stacks';
 import AuthStack from './stacks/AuthStack';
 import InitStack from './stacks/InitStack';
+import ProfileStack from './stacks/ProfileStack';
 import { TabsStack } from './stacks/TabsStack';
 
 const Stack = createStackNavigator();
@@ -26,6 +27,7 @@ const Navigator = () => {
         <Stack.Screen name={Stacks.INIT_STACK} component={InitStack} />
         <Stack.Screen name={Stacks.AUTH_STACK} component={AuthStack} />
         {TabsStack}
+        <Stack.Screen name={Stacks.PROFILE_STACK} component={ProfileStack} />
       </Stack.Navigator>
     </NavigationContainer>
   );

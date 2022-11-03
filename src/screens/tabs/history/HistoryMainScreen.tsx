@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export const HistoryMainScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>History main screen</Text>
+      <Text>History screen</Text>
     </View>
   );
 };

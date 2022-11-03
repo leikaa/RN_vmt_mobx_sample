@@ -12,7 +12,7 @@ export const HomeMainScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Home main screen</Text>
+      <Text>Main screen</Text>
     </View>
   );
 };
