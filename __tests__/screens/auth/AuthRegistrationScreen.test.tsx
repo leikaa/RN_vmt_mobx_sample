@@ -2,8 +2,8 @@ import { fireEvent, render, waitFor } from '@testing-library/react-native';
 import React from 'react';
 
 import Navigation from '../../../src/base/Navigation';
-import { screens } from '../../../src/navigation/consts/screens';
-import { stacks } from '../../../src/navigation/consts/stacks';
+import { Screens } from '../../../src/navigation/consts/screens';
+import { Tabs } from '../../../src/navigation/consts/tabs';
 import { AuthRegistrationScreen } from '../../../src/screens/auth/AuthRegistrationScreen';
 
 describe('Auth registration screen', () => {
@@ -58,7 +58,7 @@ describe('Auth registration screen', () => {
     fireEvent.press(buttonSubmit);
 
     await waitFor(() => {
-      expect(Navigation.replace).toHaveBeenCalledWith(stacks.HOME_STACK, { screen: screens.HOME_MAIN });
+      expect(Navigation.replace).toHaveBeenCalledWith(Screens.MAIN_APP, { screen: Tabs.HOME });
     });
   });
 });

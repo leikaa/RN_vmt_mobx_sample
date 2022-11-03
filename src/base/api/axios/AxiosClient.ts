@@ -2,8 +2,8 @@ import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } f
 import { Platform } from 'react-native';
 
 import { appConfig } from '../../../appConfig';
-import { screens } from '../../../navigation/consts/screens';
-import { stacks } from '../../../navigation/consts/stacks';
+import { Screens } from '../../../navigation/consts/screens';
+import { Stacks } from '../../../navigation/consts/stacks';
 import Navigation from '../../Navigation';
 import Notification from '../../ui/Notification';
 import { IApiClient } from '../IApiClient';
@@ -102,8 +102,8 @@ export default class AxiosClient implements IApiClient {
         if (error.response?.status) {
           switch (error.response?.status) {
             case this.UNAUTHORIZED_ERROR:
-              if (Navigation.getCurrentRouteName() !== screens.AUTH_MAIN) {
-                Navigation.replace(stacks.AUTH_STACK, { screen: screens.AUTH_MAIN });
+              if (Navigation.getCurrentRouteName() !== Screens.AUTH_MAIN) {
+                Navigation.replace(Stacks.AUTH_STACK, { screen: Screens.AUTH_MAIN });
               }
 
               break;

@@ -2,12 +2,12 @@ import { useBackHandler } from '@react-native-community/hooks';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import Navigation from '../base/Navigation';
-import { screens } from '../navigation/consts/screens';
+import Navigation from '../../../base/Navigation';
+import { Screens } from '../../../navigation/consts/screens';
 
 export const HomeMainScreen = () => {
   useBackHandler(() => {
-    return Navigation.navigationRef.current?.getCurrentRoute()?.name === screens.HOME_MAIN;
+    return Navigation.navigationRef.current?.getCurrentRoute()?.name === Screens.HOME_MAIN;
   });
 
   return (

@@ -2,7 +2,7 @@ import { NavigationContainerRef } from '@react-navigation/core';
 import { StackActions } from '@react-navigation/native';
 import * as React from 'react';
 
-import { stacks } from '../navigation/consts/stacks';
+import { Tabs } from '../navigation/consts/tabs';
 
 export interface NavigationParams {
   [key: string]: any;
@@ -11,7 +11,7 @@ export interface NavigationParams {
 export default class Navigation {
   static navigationRef = React.createRef<NavigationContainerRef<any>>();
 
-  static initialRoute: string = stacks.AUTH_STACK;
+  static initialRoute: string = Tabs.HOME;
 
   static getCurrentRouteName = () => {
     return this.navigationRef.current?.getCurrentRoute()?.name;

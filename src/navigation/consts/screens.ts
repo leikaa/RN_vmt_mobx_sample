@@ -1,8 +1,12 @@
-export enum screens {
+export enum Screens {
+  MAIN_APP = 'MAIN_APP',
+
   INIT_MAIN = 'INIT_MAIN',
 
   AUTH_MAIN = 'AUTH_MAIN',
   AUTH_REGISTRATION = 'AUTH_REGISTRATION',
 
   HOME_MAIN = 'HOME_MAIN',
+
+  HISTORY_MAIN = 'HISTORY_MAIN',
 }

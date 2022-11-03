@@ -10,8 +10,8 @@ import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
 import FormValidationHelper from '../../helpers/FormValidationHelper';
 import { RegistrationFormFields } from '../../modules/auth/forms/RegistrationForm';
-import { screens } from '../../navigation/consts/screens';
-import { stacks } from '../../navigation/consts/stacks';
+import { Screens } from '../../navigation/consts/screens';
+import { Tabs } from '../../navigation/consts/tabs';
 import { DefaultStyles } from '../../styles/DefaultStyles';
 
 export const AuthRegistrationScreen = observer(() => {
@@ -38,7 +38,7 @@ export const AuthRegistrationScreen = observer(() => {
     const isRegistered = await authStore.register();
 
     if (isRegistered) {
-      Navigation.replace(stacks.HOME_STACK, { screen: screens.HOME_MAIN });
+      Navigation.replace(Screens.MAIN_APP, { screen: Tabs.HOME });
     }
   };
 

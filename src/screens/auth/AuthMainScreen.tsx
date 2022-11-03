@@ -10,8 +10,9 @@ import { Button, ButtonType } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
 import FormValidationHelper from '../../helpers/FormValidationHelper';
 import { LoginFormFields } from '../../modules/auth/forms/LoginForm';
-import { screens } from '../../navigation/consts/screens';
-import { stacks } from '../../navigation/consts/stacks';
+import { Screens } from '../../navigation/consts/screens';
+import { Stacks } from '../../navigation/consts/stacks';
+import { Tabs } from '../../navigation/consts/tabs';
 import { AuthStackParamList } from '../../navigation/types/AuthStackTypes';
 import { DefaultStyles } from '../../styles/DefaultStyles';
 
@@ -25,7 +26,7 @@ export const AuthMainScreen = observer(() => {
   }, []);
 
   useBackHandler(() => {
-    return Navigation.navigationRef.current?.getCurrentRoute()?.name === screens.AUTH_MAIN;
+    return Navigation.navigationRef.current?.getCurrentRoute()?.name === Screens.AUTH_MAIN;
   });
 
   const handleChangeForm = (key: LoginFormFields, value: string) => {
@@ -33,7 +34,7 @@ export const AuthMainScreen = observer(() => {
   };
 
   const handleNavigateToRegistration = () => {
-    Navigation.navigate<AuthStackParamList>(stacks.AUTH_STACK, { screen: screens.AUTH_REGISTRATION });
+    Navigation.navigate<AuthStackParamList>(Stacks.AUTH_STACK, { screen: Screens.AUTH_REGISTRATION });
   };
 
   const handleSubmitLogin = async () => {
@@ -41,7 +42,7 @@ export const AuthMainScreen = observer(() => {
     const isLogged = await authStore.login();
 
     if (isLogged) {
-      Navigation.replace(stacks.HOME_STACK, { screen: screens.HOME_MAIN });
+      Navigation.replace(Screens.MAIN_APP, { screen: Tabs.HOME });
     }
   };
 

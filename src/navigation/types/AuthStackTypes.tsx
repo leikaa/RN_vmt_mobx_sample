@@ -1,6 +1,6 @@
-import { screens } from '../consts/screens';
+import { Screens } from '../consts/screens';
 
 export type AuthStackParamList = {
-  [screens.AUTH_MAIN]: undefined;
-  [screens.AUTH_REGISTRATION]: undefined;
+  [Screens.AUTH_MAIN]: undefined;
+  [Screens.AUTH_REGISTRATION]: undefined;
 };

@@ -1,5 +1,5 @@
-import { screens } from '../consts/screens';
+import { Screens } from '../consts/screens';
 
 export type InitStackParamList = {
-  [screens.INIT_MAIN]: undefined;
+  [Screens.INIT_MAIN]: undefined;
 };
