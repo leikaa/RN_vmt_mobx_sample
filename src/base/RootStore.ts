@@ -1,12 +1,15 @@
 import React from 'react';
 
 import { AuthStore } from '../modules/auth/AuthStore';
+import { UserStore } from '../modules/user/UserStore';
 
 class RootStore {
   authStore: AuthStore;
+  userStore: UserStore;
 
   constructor() {
     this.authStore = new AuthStore();
+    this.userStore = new UserStore();
   }
 
   sync = async () => {

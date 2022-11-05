@@ -1,10 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
+import { BalanceInfo } from '../../../widgets/BalanceInfo';
 
 export const HistoryMainScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>History screen</Text>
+      <BalanceInfo />
     </View>
   );
 };
@@ -12,7 +14,5 @@ export const HistoryMainScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });

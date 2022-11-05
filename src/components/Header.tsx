@@ -52,9 +52,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 16,
-    backgroundColor: Colors.surface.white,
+    backgroundColor: Colors.white,
 
-    shadowColor: Colors.surface.black,
+    shadowColor: Colors.black,
     shadowOffset: {
       width: 0,
       height: 1,

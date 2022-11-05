@@ -14,7 +14,6 @@ import { Screens } from '../../navigation/consts/screens';
 import { Stacks } from '../../navigation/consts/stacks';
 import { Tabs } from '../../navigation/consts/tabs';
 import { AuthStackParamList } from '../../navigation/types/AuthStackTypes';
-import { DefaultStyles } from '../../styles/DefaultStyles';
 
 export const AuthMainScreen = observer(() => {
   const { authStore } = useRootStore();
@@ -69,7 +68,7 @@ export const AuthMainScreen = observer(() => {
         placeholder={'Password'}
         autoCapitalize={'none'}
         secureTextEntry={!isPasswordVisible}
-        containerStyle={DefaultStyles.mt24}
+        containerStyle={styles.item}
         rightComponent={
           <PasswordVisibilityButton
             isVisible={isPasswordVisible}
@@ -80,7 +79,7 @@ export const AuthMainScreen = observer(() => {
         testID={'inputPassword'}
       />
 
-      <View style={[styles.registerContainer, DefaultStyles.mt8]}>
+      <View style={styles.registerContainer}>
         <Button
           title={'Sign up'}
           onPress={handleNavigateToRegistration}
@@ -95,7 +94,7 @@ export const AuthMainScreen = observer(() => {
         onPress={handleSubmitLogin}
         disabled={!authStore.loginForm.isFormValid(authStore.loginForm)}
         loading={authStore.loginLoading}
-        wrapperStyle={[styles.loginButtonContainer, DefaultStyles.mt24]}
+        wrapperStyle={[styles.loginButtonContainer, styles.item]}
         testID={'buttonSubmit'}
       />
     </ScrollView>
@@ -110,9 +109,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  item: {
+    marginTop: 24,
+  },
+
   registerContainer: {
     width: '100%',
     alignItems: 'flex-end',
+    marginTop: 8,
   },
   registerButton: {
     paddingHorizontal: 0,

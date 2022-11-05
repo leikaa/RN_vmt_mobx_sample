@@ -65,7 +65,7 @@ export const DocumentIcon = ({ size, color }: IIconProps) => {
               />
               <Path
                 id="Rectangle_599"
-                fill={color || Colors.surface.disabled}
+                fill={color || Colors.disabled}
                 d="M115,777h1c0.6,0,1,0.4,1,1v1c0,0.6-0.4,1-1,1h-1c-0.6,0-1-0.4-1-1v-1
               C114,777.4,114.4,777,115,777z"
               />

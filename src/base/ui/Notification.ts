@@ -12,7 +12,7 @@ export default class Notification {
   static showError = (errorMessage: string) => {
     showMessage({
       message: errorMessage,
-      backgroundColor: Colors.surface.red,
+      backgroundColor: Colors.red,
     });
   };
 }

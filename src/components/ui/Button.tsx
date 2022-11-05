@@ -43,13 +43,13 @@ export const Button = ({ size = ButtonSize.Medium, type = ButtonType.Primary, ..
   const color = useMemo(() => {
     switch (type) {
       case ButtonType.Secondary:
-        return props.textColor || Colors.surface.disabled;
+        return props.textColor || Colors.disabled;
 
       case ButtonType.Flat:
-        return props.textColor || Colors.surface.primary;
+        return props.textColor || Colors.primary;
 
       default:
-        return props.textColor || Colors.surface.white;
+        return props.textColor || Colors.white;
     }
   }, [type, props.textColor]);
 
@@ -125,24 +125,24 @@ const styles = StyleSheet.create({
   },
 
   [ButtonType.Primary]: {
-    backgroundColor: Colors.surface.primary,
+    backgroundColor: Colors.primary,
   },
   [`${ButtonType.Primary}_Text`]: {
-    color: Colors.surface.white,
+    color: Colors.white,
   },
 
   [ButtonType.Secondary]: {
-    backgroundColor: Colors.surface.grey1,
+    backgroundColor: Colors.grey1,
   },
   [`${ButtonType.Secondary}_Text`]: {
-    color: Colors.surface.black,
+    color: Colors.black,
   },
 
   [ButtonType.Flat]: {
     backgroundColor: Colors.transparent,
   },
   [`${ButtonType.Flat}_Text`]: {
-    color: Colors.surface.primary,
+    color: Colors.primary,
   },
 
   large: {

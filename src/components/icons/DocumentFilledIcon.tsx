@@ -18,7 +18,7 @@ export const DocumentFilledIcon = ({ size, color }: IIconProps) => {
           <G transform="translate(-177 -762)">
             <G id="Group_1091_1_" transform="translate(76 -9)">
               <Path
-                fill={color || Colors.surface.primary}
+                fill={color || Colors.primary}
                 stroke="#008ABD"
                 d="M107,775.5h12c0.3,0,0.5,0.2,0.5,0.5v14c0,0.3-0.2,0.5-0.5,0.5h-12c-0.3,0-0.5-0.2-0.5-0.5v-14
               C106.5,775.7,106.7,775.5,107,775.5z"

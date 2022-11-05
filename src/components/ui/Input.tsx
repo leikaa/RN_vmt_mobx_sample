@@ -101,9 +101,9 @@ export const Input = forwardRef((props: IInputProps, inputRef: Ref<TextInput>) =
     return (
       <View style={styles.errorWrap}>
         <View style={styles.errorIcon}>
-          <CloseCircleIcon color={Colors.surface.red} />
+          <CloseCircleIcon color={Colors.red} />
         </View>
-        <Text ag={Ag.Caption} color={Colors.surface.red}>
+        <Text ag={Ag.Caption} color={Colors.red}>
           {title}
         </Text>
       </View>
@@ -195,7 +195,7 @@ export const Input = forwardRef((props: IInputProps, inputRef: Ref<TextInput>) =
             onFocus={handleOnFocus}
             onBlur={handleOnBlur}
             placeholder={props.leftComponent ? placeholder : ''}
-            selectionColor={isCaretHidden ? Colors.transparent : Colors.surface.primary}
+            selectionColor={isCaretHidden ? Colors.transparent : Colors.primary}
           />
 
           {props.rightComponent && <View style={styles.rightComponentWrap}>{props.rightComponent}</View>}
@@ -212,16 +212,16 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: Colors.surface.disabled,
+    borderColor: Colors.disabled,
     height: 48,
     position: 'relative',
-    backgroundColor: Colors.surface.white,
+    backgroundColor: Colors.white,
   },
   containerError: {
-    borderColor: Colors.surface.red,
+    borderColor: Colors.red,
   },
   focused: {
-    borderColor: Colors.surface.primary,
+    borderColor: Colors.primary,
   },
   multiline: {
     height: 180,
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
   },
   labelText: {
     lineHeight: 18,
-    color: Colors.text.grey2,
+    color: Colors.grey2,
   },
   multilineLabel: {
     justifyContent: 'flex-start',
@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
     left: -5,
     right: -5,
     height: 2,
-    backgroundColor: Colors.surface.white,
+    backgroundColor: Colors.white,
   },
   content: {
     flex: 1,
@@ -265,7 +265,7 @@ const styles = StyleSheet.create({
     margin: 0,
     paddingTop: 21,
     paddingBottom: 7,
-    color: Colors.text.black,
+    color: Colors.black,
     fontSize: 16,
     lineHeight: 18,
   },

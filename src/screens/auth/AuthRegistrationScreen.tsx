@@ -12,7 +12,6 @@ import FormValidationHelper from '../../helpers/FormValidationHelper';
 import { RegistrationFormFields } from '../../modules/auth/forms/RegistrationForm';
 import { Screens } from '../../navigation/consts/screens';
 import { Tabs } from '../../navigation/consts/tabs';
-import { DefaultStyles } from '../../styles/DefaultStyles';
 
 export const AuthRegistrationScreen = observer(() => {
   const { authStore } = useRootStore();
@@ -65,7 +64,7 @@ export const AuthRegistrationScreen = observer(() => {
         keyboardType={'email-address'}
         isValid={FormValidationHelper.isEmailValid(authStore.registrationForm.email)}
         errorMessage={'Invalid email'}
-        containerStyle={DefaultStyles.mt24}
+        containerStyle={styles.item}
         testID={'inputEmail'}
       />
 
@@ -76,7 +75,7 @@ export const AuthRegistrationScreen = observer(() => {
         placeholder={'Password'}
         autoCapitalize={'none'}
         secureTextEntry={!isPasswordVisible}
-        containerStyle={DefaultStyles.mt24}
+        containerStyle={styles.item}
         rightComponent={
           <PasswordVisibilityButton
             isVisible={isPasswordVisible}
@@ -99,7 +98,7 @@ export const AuthRegistrationScreen = observer(() => {
         )}
         errorMessage={'Password must be repeated exactly'}
         secureTextEntry={!isPasswordVisible}
-        containerStyle={DefaultStyles.mt24}
+        containerStyle={styles.item}
         testID={'inputRepeatedPassword'}
       />
 
@@ -108,7 +107,7 @@ export const AuthRegistrationScreen = observer(() => {
         onPress={handleSubmitRegistration}
         disabled={!authStore.registrationForm.isFormValid(authStore.registrationForm)}
         loading={authStore.registrationLoading}
-        wrapperStyle={[styles.submitButtonContainer, DefaultStyles.mt24]}
+        wrapperStyle={[styles.submitButtonContainer, styles.item]}
         testID={'buttonSubmit'}
       />
     </ScrollView>
@@ -121,6 +120,9 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingHorizontal: 16,
     alignItems: 'center',
+  },
+  item: {
+    marginTop: 24,
   },
   submitButtonContainer: {
     width: '100%',

@@ -6,6 +6,7 @@ import { Colors } from '../../styles/Colors';
 export enum Ag {
   H1 = 'H1',
   H2 = 'H2',
+  Subtitle1 = 'Subtitle1',
   Regular = 'Regular',
   Button = 'Button',
   Caption = 'Caption',
@@ -37,7 +38,7 @@ export const Text = (props: IText) => {
         },
         styles[props.ag],
         {
-          color: props.color || Colors.text.black,
+          color: props.color || Colors.black,
           textAlign: props.align || Align.Auto,
         },
         props.style,
@@ -56,6 +57,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     lineHeight: 32,
     fontWeight: '600',
+  },
+  [Ag.Subtitle1]: {
+    fontSize: 16,
+    lineHeight: 24,
+    fontWeight: '500',
   },
   [Ag.Regular]: {
     fontSize: 15,
