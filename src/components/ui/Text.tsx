@@ -59,13 +59,13 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   [Ag.Subtitle1]: {
-    fontSize: 16,
+    fontSize: 18,
     lineHeight: 24,
     fontWeight: '500',
   },
   [Ag.Regular]: {
-    fontSize: 15,
-    lineHeight: 20,
+    fontSize: 16,
+    lineHeight: 18,
     fontWeight: '400',
   },
   [Ag.Button]: {

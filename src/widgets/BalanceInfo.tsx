@@ -1,16 +1,24 @@
 import { observer } from 'mobx-react';
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
 import { useRootStore } from '../base/hooks/useRootStore';
 import { CollapsibleBlock } from '../components/CollapsibleBlock';
 import { UserInfoItem } from '../components/UserInfoItem';
 
-export const BalanceInfo = observer(() => {
+interface IBalanceInfoProps {
+  containerStyles?: StyleProp<ViewStyle>;
+}
+
+export const BalanceInfo = observer((props: IBalanceInfoProps) => {
   const { userStore } = useRootStore();
 
   return (
-    <CollapsibleBlock title={'Balance info'} initialState={false} containerStyles={styles.container}>
+    <CollapsibleBlock
+      title={'Balance info'}
+      initialState={true}
+      containerStyles={[styles.container, props.containerStyles]}
+    >
       <UserInfoItem label={'Name'} title={userStore.user?.name} containerStyles={styles.item} />
       <UserInfoItem label={'Balance'} title={userStore.user?.balance} />
     </CollapsibleBlock>
@@ -19,11 +27,10 @@ export const BalanceInfo = observer(() => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
-    paddingTop: 20,
+    paddingTop: 16,
     marginBottom: 24,
   },
   item: {
-    marginVertical: 16,
+    marginVertical: 12,
   },
 });

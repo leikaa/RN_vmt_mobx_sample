@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   item: {
-    marginTop: 24,
+    marginTop: 16,
   },
   submitButtonContainer: {
     width: '100%',

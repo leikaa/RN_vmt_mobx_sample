@@ -68,11 +68,11 @@ export const ProfileMainScreen = observer(() => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 24,
+    paddingTop: 20,
     paddingHorizontal: 16,
   },
   item: {
-    marginBottom: 24,
+    marginBottom: 16,
   },
   logoutButton: {
     position: 'absolute',

@@ -1,18 +1,15 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
+import { Container } from '../../../components/Container';
 import { BalanceInfo } from '../../../widgets/BalanceInfo';
 
 export const HistoryMainScreen = () => {
   return (
-    <View style={styles.container}>
+    <Container>
       <BalanceInfo />
-    </View>
+    </Container>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+const styles = StyleSheet.create({});
