@@ -20,13 +20,13 @@ export const AuthMainScreen = observer(() => {
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  useEffect(() => {
-    return () => authStore.resetLoginForm();
-  }, []);
-
   useBackHandler(() => {
     return Navigation.navigationRef.current?.getCurrentRoute()?.name === Screens.AUTH_MAIN;
   });
+
+  useEffect(() => {
+    return () => authStore.resetLoginForm();
+  }, []);
 
   const handleChangeForm = (key: LoginFormFields, value: string) => {
     authStore.changeLoginForm(key, value);

@@ -13,6 +13,8 @@ export default class AuthService {
     this.authFactory = new AuthFactory();
   }
 
+  // API
+
   register = async (dto: RegistrationDto) => {
     const { data } = await this.authApi.register(dto);
     return this.authFactory.create<AuthAccess>(AuthAccess, data);

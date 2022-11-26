@@ -1,6 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
 import { Nullable } from '../../base/types/BaseTypes';
+import { isEmpty } from '../../base/utils/baseUtil';
 import UserService from './UserService';
 import { User } from './models/User';
 
@@ -17,6 +18,8 @@ export class UserStore {
     this.userService = new UserService();
   }
 
+  // API
+
   getUserInfo = () => {
     this.setUserInfoLoading(true);
 
@@ -29,6 +32,16 @@ export class UserStore {
       .catch(() => this.setIsUserInfoLoaded(false))
       .finally(() => this.setUserInfoLoading(false));
   };
+
+  // OTHERS
+
+  updateUserBalance = (balance: Nullable<number> | undefined) => {
+    if (!isEmpty(balance)) {
+      this.user = this.userService.updateUserBalance(this.user, balance!);
+    }
+  };
+
+  // SETTERS
 
   setUser = (user: Nullable<User>) => {
     this.user = user;

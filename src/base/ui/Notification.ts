@@ -6,6 +6,7 @@ export default class Notification {
   static showSuccess = (successMessage: string) => {
     showMessage({
       message: successMessage,
+      backgroundColor: Colors.green,
     });
   };
 

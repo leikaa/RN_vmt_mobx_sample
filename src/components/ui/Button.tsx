@@ -88,7 +88,14 @@ export const Button = ({ size = ButtonSize.Medium, type = ButtonType.Primary, ..
       style={props.wrapperStyle}
       testID={props.testID}
     >
-      <View style={[buttonStyles, styles.buttonOpacity, props.disabled && styles.buttonDisabledOpacity]}>
+      <View
+        style={[
+          buttonStyles,
+          styles.buttonOpacity,
+          props.disabled && styles.buttonDisabledOpacity,
+          props.containerStyle,
+        ]}
+      >
         {!props.loading && props.startIcon}
         {renderText()}
         {!props.loading && props.endIcon}

@@ -7,7 +7,9 @@ import { UsersListItem } from './models/UsersListItem';
 export class SearchStore {
   usersListLoading: boolean = false;
   isUsersListLoaded: boolean = true;
+  isSearchStarted: boolean = false;
 
+  searchQuery: string = '';
   usersList: UsersListItem[] = [];
 
   private searchService: SearchService;
@@ -16,6 +18,8 @@ export class SearchStore {
     makeAutoObservable(this);
     this.searchService = new SearchService();
   }
+
+  // API
 
   getUsersList = (filter: string) => {
     this.setUsersListLoading(true);
@@ -35,19 +39,20 @@ export class SearchStore {
       .finally(() => this.setUsersListLoading(false));
   };
 
-  runUserListSearch = (query: string, shouldDisplayStub: (value: boolean) => void) => {
-    this.searchService.runUserListSearch(
-      query,
-      this.usersList,
-      shouldDisplayStub,
-      this.getUsersList,
-      this.resetUsersList,
-      this.usersListLoading,
-    );
-  };
+  // RESET
 
   resetUsersList = () => {
     this.usersList = [];
+  };
+
+  // SETTERS
+
+  setSearchQuery = (value: string) => {
+    this.searchQuery = value;
+  };
+
+  setIsSearchStarted = (value: boolean) => {
+    this.isSearchStarted = value;
   };
 
   private setUsersListLoading = (value: boolean) => {

@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import React, { useState } from 'react';
+import React from 'react';
 import { FlatList, StyleSheet, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 import { IHandles } from 'react-native-modalize/lib/options';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -7,13 +7,14 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRootStore } from '../base/hooks/useRootStore';
 import { Container } from '../components/Container';
 import { DataShower } from '../components/DataShower';
-import { SearchField } from '../components/SearchField';
 import { SwipeModal } from '../components/SwipeModal';
 import { ChevronRightIcon } from '../components/icons/ChevronRightIcon';
 import { Ag, Text } from '../components/ui/Text';
+import SearchRenderHelper from '../modules/search/helpers/SearchRenderHelper';
 import { UsersListItem } from '../modules/search/models/UsersListItem';
 import { TransactionFormFields } from '../modules/transaction/forms/TransactionForm';
 import { Colors } from '../styles/Colors';
+import { SearchField } from './SearchField';
 
 interface IRecipientModalProps {
   modalRef: React.RefObject<IHandles>;
@@ -25,24 +26,27 @@ export const UsersListModal = observer((props: IRecipientModalProps) => {
   const insets = useSafeAreaInsets();
   const { height } = useWindowDimensions();
 
-  const [shouldDisplayEmptyStub, setShouldDisplayEmptyStub] = useState(false);
-
   const handleOnModalClose = () => {
+    searchStore.setSearchQuery('');
     searchStore.resetUsersList();
-    setShouldDisplayEmptyStub(false);
-  };
-
-  const handleChangeDisplayEmptyStubVisibility = (value: boolean) => {
-    setShouldDisplayEmptyStub(value);
   };
 
   const handleSearch = async (query: string) => {
-    searchStore.runUserListSearch(query, handleChangeDisplayEmptyStubVisibility);
+    if (!query) {
+      searchStore.resetUsersList();
+      return;
+    }
+
+    if (!searchStore.usersListLoading) {
+      await searchStore.getUsersList(query);
+    }
   };
 
   const handleOnItemPress = (item: UsersListItem) => {
-    transactionStore.changeForm(transactionStore.transactionForm, TransactionFormFields.name, item.name);
-    props.modalRef.current?.close();
+    if (item.name) {
+      transactionStore.changeTransactionForm(TransactionFormFields.name, item.name);
+      props.modalRef.current?.close();
+    }
   };
 
   const renderUsersListItem = ({ item }: { item: UsersListItem }) => {
@@ -62,7 +66,7 @@ export const UsersListModal = observer((props: IRecipientModalProps) => {
   };
 
   const renderNoUsersStub = () => {
-    if (!shouldDisplayEmptyStub) {
+    if (SearchRenderHelper.shouldDisplayEmptyStub(searchStore.searchQuery, searchStore.isSearchStarted)) {
       return null;
     }
 

@@ -12,33 +12,10 @@ export default class SearchService {
     this.searchFactory = new SearchFactory();
   }
 
+  // API
+
   getUsersList = async (dto: UsersListDto) => {
     const { data } = await this.searchApi.getUsersList(dto);
     return this.searchFactory.createList<UsersListItem>(UsersListItem, data);
-  };
-
-  runUserListSearch = async (
-    query: string,
-    list: UsersListItem[],
-    shouldDisplayStub: (value: boolean) => void,
-    getList: (filter: string) => Promise<void>,
-    resetList: () => void,
-    isListLoading: boolean,
-  ) => {
-    if (!query) {
-      resetList();
-      shouldDisplayStub(false);
-      return;
-    }
-
-    if (isListLoading) {
-      return;
-    }
-
-    await getList(query);
-
-    if (!list.length) {
-      shouldDisplayStub(true);
-    }
   };
 }

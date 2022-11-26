@@ -1,9 +1,11 @@
+import { isTrue } from '../../../base/utils/baseUtil';
+
 export const TransactionForm = {
   name: '',
   amount: '',
 
   isValidForm: (form: ITransactionForm) => {
-    return form.name && form.amount;
+    return isTrue(form.name && form.amount);
   },
 };
 
