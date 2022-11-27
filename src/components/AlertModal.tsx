@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     flexDirection: 'row',
     borderTopWidth: 1,
-    borderTopColor: Colors.grey1,
+    borderTopColor: Colors.grey2,
   },
   button: {
     paddingVertical: 9,
@@ -67,6 +67,6 @@ const styles = StyleSheet.create({
   },
   divider: {
     width: 1,
-    backgroundColor: Colors.grey1,
+    backgroundColor: Colors.grey2,
   },
 });

@@ -17,11 +17,11 @@ export class AuthStore {
 
   accessToken: Nullable<string> = null;
 
-  private authService: AuthService;
-  private tokenService: TokenService;
-
   loginForm = LoginForm;
   registrationForm = RegistrationForm;
+
+  private authService: AuthService;
+  private tokenService: TokenService;
 
   constructor() {
     makeAutoObservable(this);

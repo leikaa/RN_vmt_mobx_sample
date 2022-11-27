@@ -6,7 +6,7 @@ import { IIconProps } from './types/Icon';
 
 export const UserIcon = ({ size, color }: IIconProps) => {
   return (
-    <Svg width={size || '24'} height={size || '24'} viewBox="0 0 24 24">
+    <Svg width={size || 24} height={size || 24} viewBox="0 0 24 24">
       <Path
         fill={color || Colors.primary}
         d="M12.1,4.9c3.9,0,7.1,3.2,7.1,7.1s-3.2,7.1-7.1,7.1S5,15.9,5,12S8.2,4.9,12.1,4.9 M12.1,3.9C7.6,3.9,4,7.5,4,12

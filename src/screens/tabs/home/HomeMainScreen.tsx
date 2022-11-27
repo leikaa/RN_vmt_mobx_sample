@@ -66,6 +66,33 @@ export const HomeMainScreen = observer(() => {
     }
   };
 
+  const renderBalanceBlock = () => {
+    return (
+      <View style={styles.balanceContainer}>
+        <View style={styles.balanceInput}>
+          <Input
+            value={transactionStore.transactionForm.amount}
+            onChangeText={value => handleChangeTransactionForm(TransactionFormFields.amount, value)}
+            placeholder={'Transfer amount'}
+            keyboardType={'number-pad'}
+            autoCapitalize={'none'}
+            isValid={isTransferAmountValid}
+            errorMessage={'Incorrect amount specified'}
+          />
+        </View>
+        <Button
+          onPress={handleOnSubmitTransaction}
+          startIcon={<ChevronRightIcon color={Colors.white} />}
+          containerStyle={styles.submitTransferButton}
+          loading={transactionStore.transactionLoading}
+          disabled={
+            !isTransferAmountValid || !transactionStore.transactionForm.isValidForm(transactionStore.transactionForm)
+          }
+        />
+      </View>
+    );
+  };
+
   return (
     <DataShower
       isLoading={userStore.userInfoLoading}
@@ -86,31 +113,7 @@ export const HomeMainScreen = observer(() => {
           placeholder={'Name'}
           containerStyle={styles.recipientContainer}
         />
-        {!isEmpty(userStore.user?.balance) && (
-          <View style={styles.balanceContainer}>
-            <View style={styles.balanceInput}>
-              <Input
-                value={transactionStore.transactionForm.amount}
-                onChangeText={value => handleChangeTransactionForm(TransactionFormFields.amount, value)}
-                placeholder={'Transfer amount'}
-                keyboardType={'number-pad'}
-                autoCapitalize={'none'}
-                isValid={isTransferAmountValid}
-                errorMessage={'Incorrect amount specified'}
-              />
-            </View>
-            <Button
-              onPress={handleOnSubmitTransaction}
-              startIcon={<ChevronRightIcon color={Colors.white} />}
-              containerStyle={styles.submitTransferButton}
-              loading={transactionStore.transactionLoading}
-              disabled={
-                !isTransferAmountValid ||
-                !transactionStore.transactionForm.isValidForm(transactionStore.transactionForm)
-              }
-            />
-          </View>
-        )}
+        {!isEmpty(userStore.user?.balance) && renderBalanceBlock()}
       </ScrollView>
 
       <UsersListModal modalRef={modalRecipientRef} />

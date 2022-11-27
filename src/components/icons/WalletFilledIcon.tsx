@@ -6,7 +6,7 @@ import { IIconProps } from './types/Icon';
 
 export const WalletFilledIcon = ({ size, color }: IIconProps) => {
   return (
-    <Svg width={size || '24'} height={size || '24'} viewBox="0 0 24 24">
+    <Svg width={size || 24} height={size || 24} viewBox="0 0 24 24">
       <Path
         fill={color || Colors.primary}
         d="M12.4,13.8L12.4,13.8c0-1.7,1.3-3,3-3H20V8.6c0-0.6-0.4-1-1-1H5c-0.6,0-1,0.4-1,1v10.5c0,0.6,0.4,1,1,1H19

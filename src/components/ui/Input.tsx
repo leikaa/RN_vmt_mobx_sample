@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
   },
   labelText: {
     lineHeight: 18,
-    color: Colors.grey2,
+    color: Colors.grey1,
   },
   multilineLabel: {
     justifyContent: 'flex-start',

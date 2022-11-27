@@ -6,7 +6,7 @@ import { IIconProps } from './types/Icon';
 
 export const DocumentFilledIcon = ({ size, color }: IIconProps) => {
   return (
-    <Svg width={size || '24'} height={size || '24'} viewBox="0 0 24 24">
+    <Svg width={size || 24} height={size || 24} viewBox="0 0 24 24">
       <G>
         <Defs>
           <Rect id="SVGID_1_" width="24" height="24" />

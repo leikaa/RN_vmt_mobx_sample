@@ -19,7 +19,7 @@ export const UserInfoItem = (props: IUserInfoItemProps) => {
   return (
     <View style={props.containerStyles}>
       {props.label && (
-        <Text ag={Ag.Caption} color={Colors.grey2} style={styles.label}>
+        <Text ag={Ag.Caption} color={Colors.grey1} style={styles.label}>
           {props.label}:
         </Text>
       )}

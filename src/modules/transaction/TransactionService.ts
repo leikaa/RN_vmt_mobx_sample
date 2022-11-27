@@ -1,6 +1,5 @@
 import TransactionFactory from './TransactionFactory';
 import CreateTransactionDto from './dto/CreateTransactionDto';
-import { TransactionItem } from './models/TransactionItem';
 import TransactionApiRepository from './repositories/TransactionApiRepository';
 
 export default class TransactionService {
@@ -14,8 +13,13 @@ export default class TransactionService {
 
   // API
 
+  getTransactionList = async () => {
+    const { data } = await this.transactionApi.getTransactionList();
+    return this.transactionFactory.createTransactionList(data.trans_token);
+  };
+
   createTransaction = async (dto: CreateTransactionDto) => {
     const { data } = await this.transactionApi.createTransaction(dto);
-    return this.transactionFactory.create<TransactionItem>(TransactionItem, data.trans_token);
+    return this.transactionFactory.createTransactionItem(data.trans_token);
   };
 }

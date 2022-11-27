@@ -8,6 +8,10 @@ import { TransactionItem } from './models/TransactionItem';
 
 export class TransactionStore {
   transactionLoading: boolean = false;
+  transactionListLoading: boolean = false;
+  isTransactionListLoaded: boolean = true;
+
+  transactionList: TransactionItem[] = [];
 
   transactionForm = TransactionForm;
 
@@ -19,6 +23,19 @@ export class TransactionStore {
   }
 
   // API
+
+  getTransactionList = () => {
+    this.setTransactionListLoading(true);
+
+    return this.transactionService
+      .getTransactionList()
+      .then(response => {
+        this.setTransactionList(response);
+        this.setIsTransactionListLoaded(true);
+      })
+      .catch(() => this.setIsTransactionListLoaded(false))
+      .finally(() => this.setTransactionListLoading(false));
+  };
 
   createTransaction = (): Promise<TransactionItem | null> => {
     this.setTransactionLoading(true);
@@ -55,7 +72,19 @@ export class TransactionStore {
 
   // SETTERS
 
+  setTransactionList = (value: TransactionItem[]) => {
+    this.transactionList = value;
+  };
+
   private setTransactionLoading = (value: boolean) => {
     this.transactionLoading = value;
+  };
+
+  private setTransactionListLoading = (value: boolean) => {
+    this.transactionListLoading = value;
+  };
+
+  private setIsTransactionListLoaded = (value: boolean) => {
+    this.isTransactionListLoaded = value;
   };
 }

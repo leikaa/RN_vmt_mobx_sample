@@ -33,7 +33,8 @@
     "react-native-modal": "13.0.1",
     "react-native-collapsible": "1.6.0",
     "react-native-modalize": "2.1.1",
-    "react-native-portalize": "1.0.7"
+    "react-native-portalize": "1.0.7",
+    "date-fns": "2.29.3"
   },
   "devDependencies": {
     "@babel/core": "7.16.0",

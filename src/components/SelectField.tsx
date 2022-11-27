@@ -16,14 +16,14 @@ export const SelectField = (props: ISelectFieldProps) => {
   return (
     <TouchableOpacity onPress={props.onPress} style={[styles.container, styles.divider, props.containerStyle]}>
       {props.label && (
-        <Text ag={Ag.Caption} color={Colors.grey2}>
+        <Text ag={Ag.Caption} color={Colors.grey1}>
           {props.label}
         </Text>
       )}
 
       <View style={styles.content}>
         <Text
-          color={props.value ? Colors.black : Colors.grey1}
+          color={props.value ? Colors.black : Colors.grey2}
           style={[styles.text, props.textStyles]}
           ag={Ag.Regular}
           numberOfLines={1}

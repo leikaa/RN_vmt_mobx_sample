@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   },
 
   [ButtonType.Secondary]: {
-    backgroundColor: Colors.grey1,
+    backgroundColor: Colors.grey2,
   },
   [`${ButtonType.Secondary}_Text`]: {
     color: Colors.black,

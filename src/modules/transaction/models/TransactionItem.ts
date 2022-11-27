@@ -4,6 +4,7 @@ import { Nullable } from '../../../base/types/BaseTypes';
 export class TransactionItem extends AbstractModel {
   id: Nullable<number> = null;
   date: Nullable<string> = null;
+  formattedDate: Nullable<string> = null; //zero time-zone date
   username: Nullable<string> = null;
   amount: Nullable<number> = null;
   balance: Nullable<number> = null;
