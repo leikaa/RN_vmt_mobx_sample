@@ -5,9 +5,9 @@ import { IHandles } from 'react-native-modalize/lib/options';
 import { Portal } from 'react-native-portalize';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { isTrue } from '../base/utils/baseUtil';
-import { CloseTransparentCircleIcon } from './icons/CloseTransparentCircleIcon';
-import { Ag, Text } from './ui/Text';
+import { isTrue } from '../../base/utils/baseUtil';
+import { CloseTransparentCircleIcon } from '../icons/CloseTransparentCircleIcon';
+import { Ag, Text } from './Text';
 
 interface ISwipeModalProps extends ModalizeProps {
   modalRef: React.RefObject<IHandles>;

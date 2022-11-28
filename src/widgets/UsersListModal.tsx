@@ -7,14 +7,14 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRootStore } from '../base/hooks/useRootStore';
 import { Container } from '../components/Container';
 import { DataShower } from '../components/DataShower';
-import { SwipeModal } from '../components/SwipeModal';
 import { ChevronRightIcon } from '../components/icons/ChevronRightIcon';
+import { SwipeModal } from '../components/ui/SwipeModal';
 import { Ag, Text } from '../components/ui/Text';
 import SearchRenderHelper from '../modules/search/helpers/SearchRenderHelper';
 import { UsersListItem } from '../modules/search/models/UsersListItem';
 import { TransactionFormFields } from '../modules/transaction/forms/TransactionForm';
 import { Colors } from '../styles/Colors';
-import { SearchField } from './SearchField';
+import { SearchWidget } from './SearchWidget';
 
 interface IRecipientModalProps {
   modalRef: React.RefObject<IHandles>;
@@ -86,7 +86,7 @@ export const UsersListModal = observer((props: IRecipientModalProps) => {
       modalStyle={[styles.modalWrapper, { marginTop: insets.top + 16 }]}
       customRenderer={
         <View style={styles.contentWrapper}>
-          <SearchField
+          <SearchWidget
             placeholder={"Enter the recipient's name"}
             debounceAction={handleSearch}
             style={styles.searchContainer}

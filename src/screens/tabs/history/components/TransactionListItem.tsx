@@ -13,14 +13,10 @@ import { DateTypes } from '../../../../types/Date';
 
 interface ITransactionListItemProps {
   item: TransactionItem;
+  onRepeatPress: (item: TransactionItem) => void;
 }
 
 export const TransactionListItem = (props: ITransactionListItemProps) => {
-  //todo vmt - add transaction repeat
-  const handleRepeatTransaction = () => {
-    console.log('repeat pressed');
-  };
-
   const renderAmountItem = (title: string, amount: Nullable<number>, color?: string) => {
     return (
       <View style={styles.amountContainer}>
@@ -37,12 +33,12 @@ export const TransactionListItem = (props: ITransactionListItemProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerBlock}>
-        {isTrue(props.item.formattedDate) && (
+        {isTrue(props.item.formattedZeroDate) && (
           <View style={styles.headerTopContainer}>
             <Text ag={Ag.Subtitle1} style={styles.headerDate}>
-              {DateHelper.getFormattedDate(props.item.formattedDate!, DateTypes.dayMonthSeparatedHoursMinutes)}
+              {DateHelper.getFormattedDate(props.item.formattedZeroDate!, DateTypes.dayMonthSeparatedHoursMinutes)}
             </Text>
-            <TouchableOpacity onPress={handleRepeatTransaction} style={styles.headerRepeatButton}>
+            <TouchableOpacity onPress={() => props.onRepeatPress(props.item)} style={styles.headerRepeatButton}>
               <ArrowsCircledIcon />
             </TouchableOpacity>
           </View>

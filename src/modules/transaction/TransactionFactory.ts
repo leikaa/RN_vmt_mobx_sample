@@ -1,7 +1,6 @@
 import AbstractFactory from '../../base/AbstractFactory';
 import DateHelper from '../../helpers/DateHelper';
 import { DateTypes } from '../../types/Date';
-import TransactionHelper from './helpers/TransactionHelper';
 import { TransactionItem } from './models/TransactionItem';
 
 export default class TransactionFactory extends AbstractFactory {
@@ -9,7 +8,7 @@ export default class TransactionFactory extends AbstractFactory {
     const transactionItem = this.create<TransactionItem>(TransactionItem, item);
 
     if (transactionItem.date) {
-      transactionItem.formattedDate = DateHelper.getZeroTimeFromServerTime(
+      transactionItem.formattedZeroDate = DateHelper.getZeroTimeFromServerTime(
         DateHelper.getFormattedDate(
           DateHelper.getParsedDate(transactionItem.date!, DateTypes.dayMonthYearCommaHoursMinutesSeconds).toString(),
           DateTypes.yearMonthDayHoursMinutesSeconds,
@@ -21,10 +20,8 @@ export default class TransactionFactory extends AbstractFactory {
   };
 
   createTransactionList = (data: TransactionItem[]) => {
-    return TransactionHelper.sortDatesByDesc(
-      data.map(item => {
-        return this.createTransactionItem(item);
-      }),
-    );
+    return data.map(item => {
+      return this.createTransactionItem(item);
+    });
   };
 }

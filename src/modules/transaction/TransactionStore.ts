@@ -1,5 +1,6 @@
-import { makeAutoObservable, runInAction } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 
+import { Nullable } from '../../base/types/BaseTypes';
 import FormHelper from '../../helpers/FormHelper';
 import TransactionService from './TransactionService';
 import CreateTransactionDto from './dto/CreateTransactionDto';
@@ -8,9 +9,10 @@ import { TransactionItem } from './models/TransactionItem';
 
 export class TransactionStore {
   transactionLoading: boolean = false;
-  transactionListLoading: boolean = false;
+  transactionListLoading: boolean = true;
   isTransactionListLoaded: boolean = true;
 
+  isListSortByDesc: boolean = false;
   transactionList: TransactionItem[] = [];
 
   transactionForm = TransactionForm;
@@ -45,11 +47,7 @@ export class TransactionStore {
     return this.transactionService
       .createTransaction(dto)
       .then(response => {
-        runInAction(() => {
-          //todo vmt - remove log
-          console.log('response: ', JSON.stringify(response));
-        });
-
+        this.addTransactionItemToListBySort(response);
         return response;
       })
       .catch(() => {
@@ -64,16 +62,41 @@ export class TransactionStore {
     this.transactionForm = FormHelper.updateForm(this.transactionForm, key, value);
   };
 
+  // OTHERS
+
+  addTransactionItemToListBySort = (item: TransactionItem) => {
+    if (this.isListSortByDesc) {
+      this.transactionList = [...this.transactionList, item];
+      return;
+    }
+
+    this.transactionList = [item, ...this.transactionList];
+  };
+
+  prepareTemplateTransaction = (item: Nullable<TransactionItem>) => {
+    return this.transactionService.prepareTemplateTransaction(item, this.changeTransactionForm);
+  };
+
   // RESET
 
   resetTransactionForm = () => {
     this.transactionForm = TransactionForm;
   };
 
+  resetTransactionList = () => {
+    this.transactionListLoading = true;
+    this.isListSortByDesc = false;
+    this.transactionList = [];
+  };
+
   // SETTERS
 
   setTransactionList = (value: TransactionItem[]) => {
     this.transactionList = value;
+  };
+
+  setIsListSortByDesc = (value: boolean) => {
+    this.isListSortByDesc = value;
   };
 
   private setTransactionLoading = (value: boolean) => {

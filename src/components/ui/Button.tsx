@@ -17,6 +17,7 @@ export enum ButtonType {
   Primary = 'primary',
   Secondary = 'secondary',
   Flat = 'flat',
+  Outline = 'outline',
 }
 
 export enum ButtonSize {
@@ -46,6 +47,7 @@ export const Button = ({ size = ButtonSize.Medium, type = ButtonType.Primary, ..
         return props.textColor || Colors.disabled;
 
       case ButtonType.Flat:
+      case ButtonType.Outline:
         return props.textColor || Colors.primary;
 
       default:
@@ -149,6 +151,14 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.transparent,
   },
   [`${ButtonType.Flat}_Text`]: {
+    color: Colors.primary,
+  },
+
+  [ButtonType.Outline]: {
+    borderWidth: 1,
+    borderColor: Colors.primary,
+  },
+  [`${ButtonType.Outline}_Text`]: {
     color: Colors.primary,
   },
 

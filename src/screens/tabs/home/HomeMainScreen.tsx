@@ -1,7 +1,7 @@
 import { useBackHandler } from '@react-native-community/hooks';
 import { observer } from 'mobx-react';
 import React, { useEffect, useMemo, useRef } from 'react';
-import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
+import { Keyboard, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 
 import Navigation from '../../../base/Navigation';
@@ -64,6 +64,8 @@ export const HomeMainScreen = observer(() => {
       userStore.updateUserBalance(transaction?.balance);
       transactionStore.resetTransactionForm();
     }
+
+    Keyboard.dismiss();
   };
 
   const renderBalanceBlock = () => {

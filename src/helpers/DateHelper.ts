@@ -1,4 +1,4 @@
-import { format, parse, addHours, compareDesc } from 'date-fns';
+import { format, parse, addHours, compareDesc, compareAsc } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 
 import { DateTypes } from '../types/Date';
@@ -25,6 +25,10 @@ export default class DateHelper {
 
   static compareDatesByDesc = (firstDate: string, secondDate: string) => {
     return compareDesc(new Date(firstDate), new Date(secondDate));
+  };
+
+  static compareDatesByAsc = (firstDate: string, secondDate: string) => {
+    return compareAsc(new Date(firstDate), new Date(secondDate));
   };
 
   private static getDate = (date?: string) => {
