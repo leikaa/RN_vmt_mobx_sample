@@ -12,7 +12,7 @@ export const ProfileButton = () => {
   };
 
   return (
-    <TouchableOpacity onPress={handleNavigateToProfile}>
+    <TouchableOpacity onPress={handleNavigateToProfile} testID={'buttonProfile'}>
       <UserIcon size={32} />
     </TouchableOpacity>
   );

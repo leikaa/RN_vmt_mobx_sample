@@ -7,6 +7,7 @@
  * react-native-safe-area-context
  * device-info
  * react-native-keyboard-manager
+ * react-native-portalize
  * reanimated & gesture-handler (https://reactnavigation.org/docs/testing)
  */
 import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock';
@@ -44,6 +45,11 @@ jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter');
 
 //react-native-keyboard-manager
 jest.mock('./src/base/adapters/KeyboardManagerAdapter.ts', () => jest.fn());
+
+//react-native-portalize
+jest.mock('react-native-portalize', () => {
+  return { ...jest.requireActual('react-native-portalize'), Portal: ({ children }) => children };
+});
 
 //reanimated
 jest.mock('react-native-reanimated', () => {

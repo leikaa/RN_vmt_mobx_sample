@@ -114,6 +114,7 @@ export const HomeMainScreen = observer(() => {
           label={'Select a payment recipient'}
           placeholder={'Name'}
           containerStyle={styles.recipientContainer}
+          testID={'fieldSelectRecipient'}
         />
         {!isEmpty(userStore.user?.balance) && renderBalanceBlock()}
       </ScrollView>

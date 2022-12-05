@@ -87,6 +87,7 @@ export const UsersListModal = observer((props: IRecipientModalProps) => {
       customRenderer={
         <View style={styles.contentWrapper}>
           <SearchWidget
+            testID={'inputModalSearch'}
             placeholder={"Enter the recipient's name"}
             debounceAction={handleSearch}
             style={styles.searchContainer}

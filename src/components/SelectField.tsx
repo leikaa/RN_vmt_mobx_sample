@@ -14,7 +14,11 @@ interface ISelectFieldProps extends TextInputProps {
 
 export const SelectField = (props: ISelectFieldProps) => {
   return (
-    <TouchableOpacity onPress={props.onPress} style={[styles.container, styles.divider, props.containerStyle]}>
+    <TouchableOpacity
+      onPress={props.onPress}
+      style={[styles.container, styles.divider, props.containerStyle]}
+      testID={props.testID}
+    >
       {props.label && (
         <Text ag={Ag.Caption} color={Colors.grey1}>
           {props.label}

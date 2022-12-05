@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 
 import SearchService from './SearchService';
 import UsersListDto from './dto/UsersListDto';
@@ -29,10 +29,7 @@ export class SearchStore {
     return this.searchService
       .getUsersList(dto)
       .then(response => {
-        runInAction(() => {
-          this.usersList = response;
-        });
-
+        this.setUsersList(response);
         this.setIsUsersListLoaded(true);
       })
       .catch(() => this.setIsUsersListLoaded(false))
@@ -46,6 +43,10 @@ export class SearchStore {
   };
 
   // SETTERS
+
+  setUsersList = (value: UsersListItem[]) => {
+    this.usersList = value;
+  };
 
   setSearchQuery = (value: string) => {
     this.searchQuery = value;
